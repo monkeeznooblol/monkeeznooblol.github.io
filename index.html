@@ -1,7 +1,9 @@
-<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curtis - Python Developer &amp; Game Creator</title>
+    <title>Curtis - Python Developer & Game Creator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -33,17 +35,67 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
+        @keyframes sakuraFall {
+            0% { 
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        @keyframes sakuraSway {
+            0%, 100% { transform: translateX(0px) rotate(0deg); }
+            50% { transform: translateX(30px) rotate(5deg); }
+        }
         .gradient-text {
-            background: linear-gradient(135deg, #5D5CDE, #7C7CE8);
+            background: linear-gradient(135deg, #5D5CDE, #FF69B4, #FFC0CB);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        .cherry-gradient {
+            background: linear-gradient(135deg, #FFB7C5, #FF69B4, #5D5CDE);
+        }
         .project-card {
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 182, 193, 0.2);
         }
         .project-card:hover {
             transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.1);
+        }
+        .sakura-petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #FFB7C5, #FF69B4);
+            border-radius: 0 100% 0 100%;
+            animation: sakuraFall linear infinite, sakuraSway ease-in-out infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .sakura-branch {
+            position: absolute;
+            width: 100px;
+            height: 60px;
+            opacity: 0.1;
+            z-index: 5;
+        }
+        .japanese-wave {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100'%3E%3Cpath d='M0,50 Q250,0 500,50 T1000,50 L1000,100 L0,100 Z' fill='%23FFB7C5' fill-opacity='0.1'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 1000px 100px;
+            height: 100px;
+            width: 100%;
+        }
+        .cherry-blossom {
+            display: inline-block;
+            font-size: 1.2em;
+            animation: float 3s ease-in-out infinite;
+            margin: 0 8px;
+            color: #FF69B4;
         }
     </style>
 </head>
@@ -78,24 +130,32 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center animate-fade-in">
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <!-- Floating Cherry Blossoms -->
+        <div class="sakura-container absolute inset-0 pointer-events-none"></div>
+        
+        <!-- Japanese Wave Pattern -->
+        <div class="japanese-wave absolute bottom-0 left-0"></div>
+        
+        <div class="max-w-4xl mx-auto text-center animate-fade-in relative z-20">
             <div class="mb-8">
-                <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-primary to-purple-600 rounded-full flex items-center justify-center animate-float">
+                <div class="w-32 h-32 mx-auto mb-6 cherry-gradient rounded-full flex items-center justify-center animate-float shadow-lg">
                     <span class="text-4xl font-bold text-white">C</span>
                 </div>
             </div>
             <h1 class="text-4xl md:text-6xl font-bold mb-6">
                 Hi, I'm <span class="gradient-text">Curtis</span>
+                <span class="cherry-blossom">🌸</span>
             </h1>
             <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
                 A 13-year-old Python developer and game creator from Hong Kong, passionate about building amazing digital experiences
+                <span class="cherry-blossom">桜</span>
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#projects" class="bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-lg font-medium transition-colors">
-                    View My Projects
+                <a href="#projects" class="cherry-gradient hover:opacity-90 text-white px-8 py-3 rounded-lg font-medium transition-all shadow-lg">
+                    View My Projects <span class="ml-2">🌸</span>
                 </a>
-                <a href="#about" class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                <a href="#about" class="border-2 border-pink-400 text-pink-600 dark:text-pink-400 hover:bg-pink-400 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors">
                     Learn More
                 </a>
             </div>
@@ -131,7 +191,7 @@
                 
                 <div class="animate-slide-up">
                     <div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
-                        <h4 class="text-xl font-bold mb-6">Skills &amp; Technologies</h4>
+                        <h4 class="text-xl font-bold mb-6">Skills & Technologies</h4>
                         <div class="space-y-4">
                             <div>
                                 <div class="flex justify-between mb-2">
@@ -187,10 +247,15 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Project 1: Titanic Analysis -->
                 <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden animate-slide-up">
-                    <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    <div class="h-48 bg-gradient-to-br from-pink-400 via-blue-400 to-purple-500 flex items-center justify-center relative overflow-hidden">
+                        <svg class="w-20 h-20 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                         </svg>
+                        <!-- Cherry blossoms floating in background -->
+                        <div class="absolute top-2 left-4 text-white opacity-60 text-xl">🌸</div>
+                        <div class="absolute top-8 right-6 text-white opacity-50 text-lg">🌸</div>
+                        <div class="absolute bottom-4 left-8 text-white opacity-70 text-sm">🌸</div>
+                        <div class="absolute bottom-8 right-4 text-white opacity-40 text-lg">🌸</div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-3">Titanic Data Analysis</h3>
@@ -211,10 +276,16 @@
 
                 <!-- Project 2: FPS Game -->
                 <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden animate-slide-up">
-                    <div class="h-48 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"></path>
+                    <div class="h-48 bg-gradient-to-br from-red-400 via-pink-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                        <svg class="w-20 h-20 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"></path>
                         </svg>
+                        <!-- Gaming-themed cherry blossoms and Japanese elements -->
+                        <div class="absolute top-3 left-3 text-white opacity-50 text-lg">🎮</div>
+                        <div class="absolute top-6 right-8 text-white opacity-60 text-sm">🌸</div>
+                        <div class="absolute bottom-6 left-6 text-white opacity-40 text-sm">桜</div>
+                        <div class="absolute bottom-3 right-5 text-white opacity-70 text-lg">⚡</div>
+                        <div class="absolute top-12 left-12 text-white opacity-30 text-sm">🌸</div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-3">First Person Shooter Game</h3>
@@ -235,10 +306,17 @@
 
                 <!-- Project 3: Turtle Visualization -->
                 <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden animate-slide-up">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3H5a2 2 0 00-2 2v12a4 4 0 004 4h2M9 3h10a2 2 0 012 2v12a4 4 0 01-2 2H9"></path>
+                    <div class="h-48 bg-gradient-to-br from-green-400 via-pink-400 to-purple-500 flex items-center justify-center relative overflow-hidden">
+                        <svg class="w-20 h-20 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3H5a2 2 0 00-2 2v12a4 4 0 004 4h2M9 3h10a2 2 0 012 2v12a4 4 0 01-2 2H9"></path>
                         </svg>
+                        <!-- Artistic cherry blossoms and zen elements -->
+                        <div class="absolute top-4 left-5 text-white opacity-50 text-lg">🎨</div>
+                        <div class="absolute top-8 right-4 text-white opacity-60 text-lg">🌸</div>
+                        <div class="absolute bottom-5 left-4 text-white opacity-40 text-sm">禅</div>
+                        <div class="absolute bottom-8 right-8 text-white opacity-70 text-sm">🌸</div>
+                        <div class="absolute top-12 left-16 text-white opacity-30 text-sm">✨</div>
+                        <div class="absolute bottom-12 right-12 text-white opacity-50 text-xs">桜</div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-3">Cool Turtle Visualization</h3>
@@ -291,7 +369,7 @@
                             </div>
                             <div class="text-left">
                                 <p class="font-medium">Interests</p>
-                                <p class="text-gray-600 dark:text-gray-300">Games &amp; Web Development</p>
+                                <p class="text-gray-600 dark:text-gray-300">Games & Web Development</p>
                             </div>
                         </div>
                     </div>
@@ -390,7 +468,44 @@
                 card.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
             });
         });
+
+        // Cherry Blossom Animation
+        function createSakuraPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'sakura-petal';
+            
+            // Random positioning and timing
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's';
+            
+            // Random size variation
+            const size = Math.random() * 6 + 8;
+            petal.style.width = size + 'px';
+            petal.style.height = size + 'px';
+            
+            // Random rotation speed for sway animation
+            const swayDuration = Math.random() * 2 + 3;
+            petal.style.setProperty('--sway-duration', swayDuration + 's');
+            
+            document.querySelector('.sakura-container').appendChild(petal);
+            
+            // Remove petal after animation
+            setTimeout(() => {
+                if (petal.parentNode) {
+                    petal.parentNode.removeChild(petal);
+                }
+            }, 13000);
+        }
+
+        // Create petals periodically
+        function startSakuraAnimation() {
+            createSakuraPetal();
+            setTimeout(startSakuraAnimation, Math.random() * 800 + 300);
+        }
+
+        // Start the animation
+        setTimeout(startSakuraAnimation, 1000);
     </script>
-
-
-</body></html>
+</body>
+</html>
